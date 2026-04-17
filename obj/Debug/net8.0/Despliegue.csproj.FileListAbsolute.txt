@@ -102,3 +102,4 @@
 /home/coders/Escritorio/Despliegue/obj/Debug/net8.0/Despliegue.pdb
 /home/coders/Escritorio/Despliegue/obj/Debug/net8.0/Despliegue.genruntimeconfig.cache
 /home/coders/Escritorio/Despliegue/obj/Debug/net8.0/ref/Despliegue.dll
+/home/coders/Escritorio/Despliegue/obj/Debug/net8.0/Despliegue.sourcelink.json
