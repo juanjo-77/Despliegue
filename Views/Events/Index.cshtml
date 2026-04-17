@@ -1,0 +1,49 @@
+@model List<Despliegue.Models.Event>
+@{ ViewData["Title"] = "Panel Admin"; }
+
+<div class="row">
+    <div class="col s12">
+        <h4 style="color:#e040fb;font-family:'Bangers',cursive;letter-spacing:2px">
+            <i class="material-icons" style="vertical-align:middle">admin_panel_settings</i>
+            Panel de Administración
+        </h4>
+        <a href="/Events/Create" class="btn waves-effect waves-light" style="background:#7b1fa2">
+            <i class="material-icons left">add</i>Nuevo Evento
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <table class="striped responsive-table" style="background:#1a1a2e;color:#e0e0e0;border-radius:8px">
+            <thead style="background:#3d0066;color:#e040fb">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Categoría</th>
+                    <th>Ubicación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var e in Model)
+                {
+                    <tr>
+                        <td>@e.Nombre</td>
+                        <td>@e.Fecha.ToString("dd/MM/yyyy")</td>
+                        <td><span class="new badge purple darken-3" data-badge-caption="">@e.Categoria</span></td>
+                        <td>@e.Ubicacion</td>
+                        <td>
+                            <a href="/Events/Edit/@e.Id" class="btn-small waves-effect" style="background:#4a148c">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a href="/Events/Delete/@e.Id" class="btn-small waves-effect red darken-4">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

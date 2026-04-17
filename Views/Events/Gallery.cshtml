@@ -1,0 +1,115 @@
+@model List<Despliegue.Models.Event>
+@{ ViewData["Title"] = "Galería de Eventos"; }
+
+<div class="row">
+    <div class="col s12 center-align">
+        <h3 style="color:#e040fb;font-family:'Bangers',cursive;letter-spacing:3px;font-size:3rem">
+            <i class="material-icons large" style="vertical-align:middle;color:#e040fb">auto_awesome</i>
+            Cartelera Anime
+        </h3>
+        <p style="color:#9e9e9e">Descubre los mejores eventos del mundo anime</p>
+    </div>
+</div>
+
+<!-- Filtros -->
+<div class="row">
+    <div class="col s12">
+        <form method="get" action="/Events/Gallery" style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+            <div class="input-field" style="margin:0;min-width:180px">
+                <select name="categoria" class="browser-default"
+                        style="background:#1a1a2e;color:#e0e0e0;border:1px solid #7b1fa2;border-radius:6px;padding:8px">
+                    <option value="">Todas las categorías</option>
+                    @{
+                        var categorias = ViewBag.Categorias as List<string> ?? new List<string>();
+                        foreach (var cat in categorias)
+                        {
+                            if (ViewBag.CategoriaActual == cat)
+                            {
+                                <option value="@cat" selected>@cat</option>
+                            }
+                            else
+                            {
+                                <option value="@cat">@cat</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="input-field" style="margin:0;min-width:180px">
+                <select name="orden" class="browser-default"
+                        style="background:#1a1a2e;color:#e0e0e0;border:1px solid #7b1fa2;border-radius:6px;padding:8px">
+                    @if (ViewBag.OrdenActual == "fecha_desc")
+                    {
+                        <option value="fecha_asc">Fecha: más próximos</option>
+                        <option value="fecha_desc" selected>Fecha: más lejanos</option>
+                    }
+                    else
+                    {
+                        <option value="fecha_asc" selected>Fecha: más próximos</option>
+                        <option value="fecha_desc">Fecha: más lejanos</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn waves-effect waves-light" style="background:#7b1fa2">
+                <i class="material-icons left">filter_list</i>Filtrar
+            </button>
+            <a href="/Events/Gallery" class="btn waves-effect waves-light grey darken-3">
+                <i class="material-icons left">clear</i>Limpiar
+            </a>
+        </form>
+    </div>
+</div>
+
+<!-- Grid de cards -->
+<div class="row">
+    @if (!Model.Any())
+    {
+        <div class="col s12 center-align" style="padding:60px 0">
+            <i class="material-icons large" style="color:#7b1fa2">event_busy</i>
+            <p style="color:#9e9e9e;font-size:1.2rem">No hay eventos disponibles aún.</p>
+            <a href="/Events/Create" class="btn waves-effect waves-light" style="background:#7b1fa2">
+                <i class="material-icons left">add</i>Crear el primero
+            </a>
+        </div>
+    }
+    else
+    {
+        @foreach (var e in Model)
+        {
+            <div class="col s12 m6 l4">
+                <div class="card" style="background:#1a1a2e;border-radius:12px;border:1px solid #3d0066">
+                    @if (!string.IsNullOrEmpty(e.ImagenUrl))
+                    {
+                        <div class="card-image">
+                            <img src="@e.ImagenUrl" alt="@e.Nombre"
+                                 style="height:200px;object-fit:cover;border-radius:12px 12px 0 0"/>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="height:120px;background:#3d0066;border-radius:12px 12px 0 0;
+                                    display:flex;align-items:center;justify-content:center">
+                            <i class="material-icons large" style="color:#e040fb">theaters</i>
+                        </div>
+                    }
+                    <div class="card-content">
+                        <span class="new badge purple darken-3" data-badge-caption="">@e.Categoria</span>
+                        <p class="card-title" style="color:#e040fb;font-family:'Bangers',cursive;
+                                                     font-size:1.4rem;margin-top:8px">@e.Nombre</p>
+                        <p style="color:#9e9e9e;font-size:0.9rem">
+                            <i class="material-icons tiny" style="vertical-align:middle">calendar_today</i>
+                            @e.Fecha.ToString("dd MMM yyyy")
+                        </p>
+                        <p style="color:#9e9e9e;font-size:0.9rem">
+                            <i class="material-icons tiny" style="vertical-align:middle">location_on</i>
+                            @e.Ubicacion
+                        </p>
+                        <p style="color:#bdbdbd;font-size:0.85rem;margin-top:8px">
+                            @(e.Descripcion.Length > 100 ? e.Descripcion[..100] + "..." : e.Descripcion)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

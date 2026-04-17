@@ -1,0 +1,73 @@
+@model Despliegue.Models.Event
+@{ ViewData["Title"] = "Crear Evento"; }
+
+<div class="row">
+    <div class="col s12 m8 offset-m2">
+        <div class="card" style="background:#1a1a2e;border-radius:12px">
+            <div class="card-content">
+                <span class="card-title" style="color:#e040fb;font-family:'Bangers',cursive;font-size:2rem">
+                    <i class="material-icons" style="vertical-align:middle">event</i>
+                    Nuevo Evento
+                </span>
+
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="red-text"></div>
+
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="color:#e040fb">title</i>
+                        <input asp-for="Nombre" id="Nombre" type="text" style="color:#e0e0e0"/>
+                        <label for="Nombre" style="color:#9e9e9e">Nombre del evento</label>
+                        <span asp-validation-for="Nombre" class="red-text"></span>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="color:#e040fb">calendar_today</i>
+                        <input asp-for="Fecha" id="Fecha" type="date" style="color:#e0e0e0"/>
+                        <label for="Fecha" class="active" style="color:#9e9e9e">Fecha</label>
+                        <span asp-validation-for="Fecha" class="red-text"></span>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="color:#e040fb">description</i>
+                        <textarea asp-for="Descripcion" id="Descripcion"
+                                  class="materialize-textarea" style="color:#e0e0e0"></textarea>
+                        <label for="Descripcion" style="color:#9e9e9e">Descripción</label>
+                        <span asp-validation-for="Descripcion" class="red-text"></span>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="color:#e040fb">location_on</i>
+                        <input asp-for="Ubicacion" id="Ubicacion" type="text" style="color:#e0e0e0"/>
+                        <label for="Ubicacion" style="color:#9e9e9e">Ubicación</label>
+                        <span asp-validation-for="Ubicacion" class="red-text"></span>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="color:#e040fb">category</i>
+                        <input asp-for="Categoria" id="Categoria" type="text" style="color:#e0e0e0"/>
+                        <label for="Categoria" style="color:#9e9e9e">Categoría (ej: Shonen, Mecha, Idol...)</label>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="color:#e040fb">image</i>
+                        <input asp-for="ImagenUrl" id="ImagenUrl" type="url" style="color:#e0e0e0"/>
+                        <label for="ImagenUrl" style="color:#9e9e9e">URL del póster</label>
+                    </div>
+
+                    <div class="row" style="margin-top:20px">
+                        <div class="col s12">
+                            <button type="submit" class="btn waves-effect waves-light"
+                                    style="background:#7b1fa2">
+                                <i class="material-icons left">save</i>Guardar
+                            </button>
+                            <a href="/Events/Index" class="btn waves-effect waves-light grey darken-3"
+                               style="margin-left:10px">
+                                <i class="material-icons left">arrow_back</i>Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
