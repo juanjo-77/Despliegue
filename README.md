@@ -1,4 +1,3 @@
-Aquí va el README:
 
 ---
 
